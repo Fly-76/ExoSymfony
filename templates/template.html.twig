@@ -1,0 +1,37 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+    <ul class="nav bg-dark mt-0">
+        <li class="nav-item">
+            <a class="nav-link text-white" href="{{ path("home") }}">Accueil</a>
+        </li>        
+        <li class="nav-item">
+            <a class="nav-link text-white" href="{{ path("show_post") }}">Montrer</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" href="{{ path("add_post") }}">Ajouter</a>
+        </li>
+    </ul>
+
+    <header class="jumbotron jumbotron-fluid bg-secondary text-white">
+        <section class="container">
+            <h1 class="display-4">BLOG</h1>
+            <p class="lead">One more blog...</p>
+        </section>
+    </header>
+
+    <main  class="container my-5">
+        {% for message in app.flashes('success') %}
+			<div class="alert alert-success" role="alert">{{ message }}</div>
+		{% endfor %}
+        {% block main %} {% endblock %}
+    </main>
+
+    <footer class="jumbotron jumbotron-fluid bg-dark text-white">
+        <section class="container">
+            <p class="lead">Bibi blog, Tous droits réservé</p>
+        </section>
+    </footer>
+
+{% endblock %}

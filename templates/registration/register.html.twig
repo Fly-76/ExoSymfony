@@ -1,0 +1,39 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Enregistrement{% endblock %}
+
+{% block body %}
+
+<div class ="container my-5">
+    <div class="card">
+
+
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+
+        <div class="card-header">
+            <h1 class="h3 mb-3 font-weight-normal">Enregistrez vous</h1>
+        </div>
+        <div class="card-body">
+
+            {{ form_start(registrationForm) }}
+                <div class="mb-3">
+                    {{ form_row(registrationForm.email) }}
+                </div>                
+                <div class="mb-3">            
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Password'
+                    }) }}
+                </div>                
+                <div class="mb-3">            
+                    {{ form_row(registrationForm.agreeTerms) }}
+                </div>
+                <button type="submit" class="btn btn-lg btn-secondary">S'enregister</button>
+            {{ form_end(registrationForm) }}
+
+        </div>  
+    </div>
+</div>
+
+{% endblock %}

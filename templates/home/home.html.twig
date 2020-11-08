@@ -1,0 +1,28 @@
+{% extends 'template.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+{% block main %}
+
+
+    <h2>Derniers articles</h2>
+    {% for article in articles %}
+
+        <div class="card my-3">
+            <div class="card-header">
+                <h5>Sujet : <a href={{ path("show_post") }}/{{article.id}}>{{article.title}}</a></h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-striped table-bordered table-sm">
+                    <tbody>
+                        <tr><th>Auteur</th><td>{{article.author}}</td></tr>
+                        <tr><th>Date</th><td>{{article.date|date("m/d/Y H:i")}}</td></tr>
+                        <tr><th>Nombre de vue</th><td>{{article.viewCount}}</td></tr>
+                        <tr><th>Catégorie</th><td>{{article.category}}</td></tr>
+                        <tr><th>Extrait</th><td>{{article.FiftyFistCharOfContent}}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock %}
