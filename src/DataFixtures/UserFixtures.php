@@ -18,16 +18,24 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        // $product = new Product();
-        // $manager->persist($product);
-
         $user = new User();
-        $user->setPassword($this->passwordEncoder->encodePassword(
-            $user,
-            '1$MVhQSlNXUmREUlE1VUw4dQ$/qEC1JwV+3FD06VOe0MnG5RUjOcix2IMjY4KwlA80mc'
-        ));
 
-        //$manager->flush();
+        // $user->setPassword($this->passwordEncoder->encodePassword(
+        //     $user,
+        //     '1$MVhQSlNXUmREUlE1VUw4dQ$/qEC1JwV+3FD06VOe0MnG5RUjOcix2IMjY4KwlA80mc'
+        // ));
+
+        $user->setPassword('1$MVhQSlNXUmREUlE1VUw4dQ$/qEC1JwV+3FD06VOe0MnG5RUjOcix2IMjY4KwlA80mc');
+        $user->setEmail('user@gmail.com.');
+        $user->setRole('ROLE_USER');
+        $manager->persist($user);
+
+        $user->setPassword('1$MVhQSlNXUmREUlE1VUw4dQ$/qEC1JwV+3FD06VOe0MnG5RUjOcix2IMjY4KwlA80mc');
+        $user->setEmail('admin@gmail.com.');
+        $user->setRole('ROLE_ADMIN');
+        $manager->persist($user);
+
+        $manager->flush();
     }
 }
 /*
