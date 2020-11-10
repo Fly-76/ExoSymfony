@@ -2,6 +2,8 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User;
+
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -19,31 +21,17 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $user = new User();
-
-        // $user->setPassword($this->passwordEncoder->encodePassword(
-        //     $user,
-        //     '1$MVhQSlNXUmREUlE1VUw4dQ$/qEC1JwV+3FD06VOe0MnG5RUjOcix2IMjY4KwlA80mc'
-        // ));
-
-        $user->setPassword('1$MVhQSlNXUmREUlE1VUw4dQ$/qEC1JwV+3FD06VOe0MnG5RUjOcix2IMjY4KwlA80mc');
-        $user->setEmail('user@gmail.com.');
-        $user->setRole('ROLE_USER');
+        $user->setPassword($this->passwordEncoder->encodePassword($user,'user01'));
+        $user->setEmail('user@gmail.com');
+        $user->setRoles(['ROLE_USER']);
         $manager->persist($user);
+        $manager->flush();
 
-        $user->setPassword('1$MVhQSlNXUmREUlE1VUw4dQ$/qEC1JwV+3FD06VOe0MnG5RUjOcix2IMjY4KwlA80mc');
-        $user->setEmail('admin@gmail.com.');
-        $user->setRole('ROLE_ADMIN');
+        $user = new User();
+        $user->setPassword($this->passwordEncoder->encodePassword($user,'admin01'));
+        $user->setEmail('admin@gmail.com');
+        $user->setRoles(['ROLE_ADMIN']);
         $manager->persist($user);
-
         $manager->flush();
     }
 }
-/*
-pwd:admin
------------------- ---------------------------------------------------------------------------------------------------
-Key                Value
------------------- ---------------------------------------------------------------------------------------------------
-Encoder used       Symfony\Component\Security\Core\Encoder\MigratingPasswordEncoder
-Encoded password   $argon2id$v=19$m=65536,t=4,p=1$MVhQSlNXUmREUlE1VUw4dQ$/qEC1JwV+3FD06VOe0MnG5RUjOcix2IMjY4KwlA80mc
------------------- ---------------------------------------------------------------------------------------------------
-*/
