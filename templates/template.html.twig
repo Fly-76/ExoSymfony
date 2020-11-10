@@ -6,13 +6,48 @@
         <li class="nav-item">
             <a class="nav-link text-white" href="{{ path("home") }}">Accueil</a>
         </li>        
-        <li class="nav-item">
-            <a class="nav-link text-white" href="{{ path("show_post") }}">Montrer</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" href="{{ path("add_post") }}">Ajouter</a>
-        </li>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path("add_post") }}">Nouveau</a>
+            </li>
+        {% endif %}
+ 
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+ 
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path("app_logout") }}">Deconnexion</a>
+            </li>        
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path("app_register") }}">S'enregistrer</a>
+            </li>        
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ path("app_login") }}">Connexion</a>
+            </li>        
+        {% endif %}
+
     </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <header class="jumbotron jumbotron-fluid bg-secondary text-white">
         <section class="container">
